@@ -45,7 +45,7 @@ const Criterias: FC<Props> = ({ criterias, setCriterias, matrix, setMatrix, setS
     setCriteria(defaultCriteria);
     setShowForm(false);
     let arrMatrix = [...matrix];
-    arrMatrix.forEach((row) => row.push(0));
+    arrMatrix.forEach((row) => row.push(1));
     setMatrix(arrMatrix);
   };
 

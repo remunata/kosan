@@ -45,7 +45,7 @@ const Alternatives: FC<Props> = ({ alternatives, setAlternatives, matrix, setMat
     setAlternatives([...alternatives, alternative]);
     setAlternative(defaultAlternative);
     setShowForm(false);
-    setMatrix([...matrix, Array(matrix[0].length).fill(0)]);
+    setMatrix([...matrix, Array(matrix[0].length).fill(1)]);
   };
 
   const alternativesList = alternatives.map((alternative, index) => (
