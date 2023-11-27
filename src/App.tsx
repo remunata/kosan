@@ -10,6 +10,7 @@ import Alternatives from "./components/Alternatives";
 import Matrix from "./components/Matrix";
 import Calculations from "./components/calculations/Calculations";
 import Footer from "./components/Footer";
+import Documentation from "./components/Documentation";
 
 function App() {
   const [criterias, setScriterias] = useState<Criteria[]>(getCriterias());
@@ -23,6 +24,7 @@ function App() {
       <div className="flex flex-col items-center">
         <Header />
         <Hero />
+        <Documentation />
         <div className="w-full flex items-start py-16 gap-10" id="calculation">
           <Criterias criterias={criterias} setCriterias={setScriterias} matrix={matrix} setMatrix={setMatrix} setShowCalculation={setShowCalculation} />
           <Alternatives
