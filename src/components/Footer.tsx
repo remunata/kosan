@@ -7,7 +7,7 @@ import { faEnvelope, faHouse } from "@fortawesome/free-solid-svg-icons";
 function Footer() {
   return (
     <>
-      <div className="px-40 w-full bg-slate-700 z-50 pb-20 pt-10 text-white flex flex-col relative">
+      <div className="px-40 w-full bg-slate-700 z-50 py-10 text-white flex flex-col relative">
         <div className="w-full flex justify-between items-center">
           <span className="text-md italic">
             This application is open source, you can contribute in GitHub
@@ -58,6 +58,11 @@ function Footer() {
               </span>
             </div>
           </div>
+        </div>
+        <div className="mt-10 w-full">
+          <span className="text-md italic float-right">
+            Copyright &copy; 2023 KOSAN. All rights reserved.
+          </span>
         </div>
       </div>
     </>
