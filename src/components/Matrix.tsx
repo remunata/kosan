@@ -35,6 +35,7 @@ const Matrix: FC<Props> = ({
             icon={faMinus}
             className="mr-5 text-sm"
             onClick={() => {
+              if (value === 0) return;
               setShowCalculation(false);
               let arr = [...matrix];
               arr[idx][index] -= 1;
@@ -46,6 +47,7 @@ const Matrix: FC<Props> = ({
             icon={faPlus}
             className="ml-5 text-sm"
             onClick={() => {
+              if (value === 5) return;
               setShowCalculation(false);
               let arr = [...matrix];
               arr[idx][index] += 1;
