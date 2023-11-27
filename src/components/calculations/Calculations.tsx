@@ -9,6 +9,7 @@ import Weight from "./Weight";
 import SPSN from "./SPSN";
 import NSPNSN from "./NSPNSN";
 import AS from "./AS";
+import Rangking from "./Rangking";
 
 type Props = {
   criterias: Criteria[];
@@ -158,6 +159,20 @@ const Calculations: FC<Props> = ({ criterias, alternatives, matrix }) => {
     return arr;
   };
 
+  const rangking = () => {
+    let arr = [];
+    let asArr = [...as()];
+    for (let i = 0; i < alternatives.length; i++) {
+      arr.push({
+        id: alternatives[i].id,
+        name: alternatives[i].name,
+        value: asArr[i],
+      });
+    }
+
+    return arr.sort((a, b) => b.value - a.value);
+  }
+
   return (
     <>
       <Mean
@@ -183,6 +198,7 @@ const Calculations: FC<Props> = ({ criterias, alternatives, matrix }) => {
         <NSPNSN alternatives={alternatives} nsp={nsp} nsn={nsn} />
         <AS alternatives={alternatives} as={as} />
       </div>
+      <Rangking rangking={rangking} />
     </>
   );
 };
