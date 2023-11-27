@@ -11,9 +11,12 @@ import {
 type Props = {
   criterias: Criteria[];
   setCriterias: (val: Criteria[]) => void;
+  matrix: number[][];
+  setMatrix: (val: number[][]) => void;
+  setShowCalculation: (val: boolean) => void;
 };
 
-const Criterias: FC<Props> = ({ criterias, setCriterias }) => {
+const Criterias: FC<Props> = ({ criterias, setCriterias, matrix, setMatrix, setShowCalculation }) => {
   const [showForm, setShowForm] = useState<Boolean>(false);
   const defaultCriteria: Criteria = {
     id: "",
@@ -23,25 +26,37 @@ const Criterias: FC<Props> = ({ criterias, setCriterias }) => {
   };
   const [criteria, setCriteria] = useState<Criteria>(defaultCriteria);
 
-  const handleDeleteCriteria = (id: string) => {
-    setCriterias(criterias.filter((criteria) => criteria.id !== id));
+  const handleDeleteCriteria = (index: number) => {
+    setShowCalculation(false);
+    
+    let arr = [...criterias];
+    arr.splice(index, 1);
+    setCriterias(arr);
+
+    let arrMatrix = [...matrix];
+    arrMatrix.forEach((row) => row.splice(index, 1));
+    setMatrix(arrMatrix);
   };
 
   const handleSubmitCriteria = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setShowCalculation(false)
     setCriterias([...criterias, criteria]);
     setCriteria(defaultCriteria);
     setShowForm(false);
+    let arrMatrix = [...matrix];
+    arrMatrix.forEach((row) => row.push(0));
+    setMatrix(arrMatrix);
   };
 
-  const criteriasList = criterias.map((criteria) => (
+  const criteriasList = criterias.map((criteria, index) => (
     <tr className="hover:bg-slate-100 cursor-pointer" key={criteria.id}>
       <td className="py-2 border border-slate-400">{criteria.id}</td>
       <td className="py-2 border border-slate-400">{criteria.name}</td>
       <td className="py-2 border border-slate-400">{criteria.status}</td>
       <td className="py-2 border border-slate-400">{criteria.weight}</td>
       <td className="py-2 border border-slate-400">
-        <button onClick={() => handleDeleteCriteria(criteria.id)}>
+        <button onClick={() => handleDeleteCriteria(index)}>
           <FontAwesomeIcon
             icon={faTrash}
             className="hover:text-red-500 transition-colors"

@@ -24,12 +24,13 @@ function App() {
         <Header />
         <Hero />
         <div className="w-full flex items-start py-16 gap-10" id="calculation">
-          <Criterias criterias={criterias} setCriterias={setScriterias} />
+          <Criterias criterias={criterias} setCriterias={setScriterias} matrix={matrix} setMatrix={setMatrix} setShowCalculation={setShowCalculation} />
           <Alternatives
             alternatives={alternatives}
             setAlternatives={setAlternatives}
             matrix={matrix}
             setMatrix={setMatrix}
+            setShowCalculation={setShowCalculation}
           />
         </div>
         <Matrix

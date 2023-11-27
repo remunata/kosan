@@ -13,9 +13,10 @@ type Props = {
   setAlternatives: (val: Alternative[]) => void;
   matrix: number[][];
   setMatrix: (val: number[][]) => void;
+  setShowCalculation: (val: boolean) => void;
 };
 
-const Alternatives: FC<Props> = ({ alternatives, setAlternatives, matrix, setMatrix }) => {
+const Alternatives: FC<Props> = ({ alternatives, setAlternatives, matrix, setMatrix, setShowCalculation }) => {
   const [showForm, setShowForm] = useState<Boolean>(false);
 
   const defaultAlternative: Alternative = {
@@ -26,26 +27,33 @@ const Alternatives: FC<Props> = ({ alternatives, setAlternatives, matrix, setMat
   const [alternative, setAlternative] =
     useState<Alternative>(defaultAlternative);
 
-  const handleDeleteAlternative = (id: string) => () => {
-    setAlternatives(
-      alternatives.filter((alternative) => alternative.id !== id)
-    );
+  const handleDeleteAlternative = (index: number) => () => {
+    setShowCalculation(false);
+
+    let arr  = [...alternatives];
+    arr.splice(index, 1);
+    setAlternatives(arr);
+
+    let arrMatrix = [...matrix];
+    arrMatrix.splice(index, 1);
+    setMatrix(arrMatrix);
   };
 
   const handleSubmitAlternative = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setShowCalculation(false);
     setAlternatives([...alternatives, alternative]);
     setAlternative(defaultAlternative);
     setShowForm(false);
     setMatrix([...matrix, Array(matrix[0].length).fill(0)]);
   };
 
-  const alternativesList = alternatives.map((alternative) => (
+  const alternativesList = alternatives.map((alternative, index) => (
     <tr className="hover:bg-slate-100 cursor-pointer" key={alternative.id}>
       <td className="py-2 border border-slate-400">{alternative.id}</td>
       <td className="py-2 border border-slate-400">{alternative.name}</td>
       <td className="py-2 border border-slate-400">
-        <button onClick={handleDeleteAlternative(alternative.id)}>
+        <button onClick={handleDeleteAlternative(index)}>
           <FontAwesomeIcon
             icon={faTrash}
             className="hover:text-red-500 transition-colors"
